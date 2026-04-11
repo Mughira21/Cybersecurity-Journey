@@ -1,1 +1,245 @@
+# TryHackMe – Network Fundamentals (Pre-Security)
 
+## Overview
+This document summarizes my learning from the **Network Fundamentals** section of the TryHackMe Pre-Security path. It covers basic networking concepts, topologies, the OSI model, IP addressing, routing, and key network protocols.
+
+---
+
+## 🌐 LAN Topologies
+
+### 🔹 Star Topology
+- All devices connect to a central device
+
+**Advantages:**
+- Easy to add more devices
+- Easy to manage and control
+- Reliable (if one device fails, others still work)
+
+**Disadvantages:**
+- If central device fails, the entire network fails
+- More devices = more maintenance
+- Expensive (more cables + central device required)
+
+---
+
+### 🔹 Bus Topology
+- All devices are connected to a single cable
+
+**Advantages:**
+- Cheap (less cabling, no central device)
+- Easy to set up
+
+**Disadvantages:**
+- Slow when traffic increases
+- Hard to troubleshoot issues
+- If main cable fails, whole network stops
+
+---
+
+### 🔹 Ring Topology
+- Devices form a circular network
+- Data travels in one direction
+
+**Advantages:**
+- Less chance of traffic congestion
+- Easier to locate faults
+- Uses less cabling
+
+**Disadvantages:**
+- If one device/cable fails, network stops
+- Data travels through multiple devices → slower performance
+
+---
+
+## 🔌 Network Devices
+
+### Switch
+- Connects multiple devices in a network
+- Sends data to the correct device using MAC addresses
+
+### Router
+- Connects different networks together
+- Finds the best path for data transmission
+
+---
+
+## 📡 Subnetting
+- Dividing a large network into smaller networks
+- Improves security and organization
+- Helps manage traffic efficiently
+
+---
+
+## 🌍 IP Addressing
+
+Example:
+`192.168.1.100`
+
+- **Network Address** → Identifies the network (e.g., 192.168.1.0)
+- **Host Address** → Identifies devices in the network
+
+### 🔹 Default Gateway
+- Device that sends traffic outside the network
+- Example: 192.168.1.254
+
+---
+
+## 🔁 ARP (Address Resolution Protocol)
+- Maps IP addresses to MAC addresses
+
+**How it works:**
+- Device asks: “Who has this IP?”
+- Correct device replies with MAC address
+
+✔ IP can change  
+✔ MAC address is permanent  
+
+---
+
+## ⚙️ DHCP (Dynamic Host Configuration Protocol)
+- Automatically assigns IP addresses to devices
+
+### Process:
+- **Discover** → Device requests IP
+- **Offer** → Server offers IP
+- **Request** → Device accepts IP
+- **Acknowledge** → Server confirms assignment
+
+---
+
+## 🧠 OSI Model
+
+The OSI Model explains how data travels across a network.
+
+### Why it is important:
+- Standardizes communication
+- Allows different systems to communicate
+
+---
+
+### 🔹 OSI Layers
+
+#### 1. Physical Layer
+- Hardware (cables, signals)
+- Transmits raw bits (0s and 1s)
+
+#### 2. Data Link Layer
+- Uses MAC addresses
+- Prepares data for transmission
+
+#### 3. Network Layer
+- Uses IP addresses
+- Finds best route (like Google Maps)
+
+#### 4. Transport Layer
+- Controls data delivery
+
+**TCP:**
+- Reliable but slower
+- Ensures complete delivery
+
+**UDP:**
+- Fast but no guarantee of delivery
+
+#### 5. Session Layer
+- Manages communication sessions
+- Can resume interrupted transfers
+
+#### 6. Presentation Layer
+- Formats, translates, and encrypts data
+- Ensures compatibility between systems
+
+#### 7. Application Layer
+- User-facing layer
+- Examples: browsers, email, file transfer apps
+
+---
+
+### 🔄 OSI Flow
+Application → Presentation → Session → Transport → Network → Data Link → Physical
+
+---
+
+## 📦 Packets & Frames
+
+### 🔹 Packet (Layer 3 - Network Layer)
+- Uses IP addresses
+- Contains:
+  - Source IP
+  - Destination IP
+  - TTL (Time To Live)
+  - Checksum
+
+### 🔹 Frame (Layer 2 - Data Link Layer)
+- Uses MAC addresses
+- Used for local delivery inside networks
+
+### Why packets are used:
+- Breaks data into smaller pieces
+- Improves speed and efficiency
+- Reduces congestion
+
+---
+
+## 🚪 Ports
+
+A port identifies which application should receive data.
+
+### Common Ports:
+- FTP → 21
+- SSH → 22
+- HTTP → 80
+- HTTPS → 443
+- SMB → 445
+- RDP → 3389
+
+---
+
+## 🔀 Port Forwarding
+- Allows access to internal services from the internet
+
+Example:
+- Internal IP: 192.168.1.10
+- Router forwards traffic from port 80 to this device
+
+---
+
+## 🔥 Firewall
+
+A firewall controls incoming and outgoing traffic.
+
+### Rules include:
+- Source IP
+- Destination IP
+- Port number
+- Protocol (TCP/UDP)
+
+---
+
+### 🔹 Types of Firewall
+
+**Stateful Firewall:**
+- Tracks full connections
+- More secure
+- Uses more resources
+
+**Stateless Firewall:**
+- Checks individual packets
+- Faster but less intelligent
+
+---
+
+## 🔐 VPN (Virtual Private Network)
+- Creates a secure encrypted tunnel over the internet
+- Connects remote networks securely
+
+### Example:
+Office Karachi ↔ Office Lahore
+
+- Without VPN → Data is exposed
+- With VPN → Data is encrypted and secure
+
+---
+
+## 🧭 Network Flow Example
+Device → Switch → Router → Internet → Switch → Device
