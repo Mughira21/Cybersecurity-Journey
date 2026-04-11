@@ -1,1 +1,231 @@
+## Overview
+This document summarizes my learning from the **How the Web Works** section of the TryHackMe Pre-Security path. It covers DNS, HTTP/HTTPS, web requests, status codes, cookies, web architecture, and common web security concepts.
 
+---
+
+## 🌍 DNS (Domain Name System)
+
+DNS makes the internet human-friendly by converting domain names into IP addresses.
+
+### How it works:
+- We type: `facebook.com`
+- DNS finds its IP address
+- Browser connects to that IP to load the website
+
+---
+
+### 🔹 DNS Hierarchy
+
+- **Subdomain** → Specific section (e.g., `admin.tryhackme.com`)
+- **SLD (Second-Level Domain)** → Main website name (e.g., `tryhackme`)
+- **TLD (Top-Level Domain)**:
+  - `.com` → Generic (gTLD)
+  - `.pk` → Country-based (ccTLD)
+
+---
+
+### 🔁 DNS Request Process
+
+1. Browser checks cache (fastest)
+2. If not found → asks Recursive DNS server  
+3. If not found → asks Root Server  
+4. Root → directs to TLD server (.com)  
+5. TLD → directs to Authoritative Server  
+6. Authoritative Server → returns IP address  
+
+Example:  
+`tryhackme.com → 104.26.10.229`
+
+---
+
+## 🌐 HTTP (Hypertext Transfer Protocol)
+
+- Protocol used for communication between browser and web server
+- Used to load websites (HTML, images, videos)
+
+### How it works:
+- Browser sends **HTTP Request**
+- Server sends **HTTP Response**
+
+---
+
+## 🔒 HTTPS
+- Secure version of HTTP
+- Encrypts communication between browser and server
+
+---
+
+## 🔗 URL (Uniform Resource Locator)
+
+A URL tells the browser where and how to access a resource.
+
+### Parts of a URL:
+
+- **Scheme** → HTTP / HTTPS  
+- **User (optional)** → username:password  
+- **Host** → domain name (e.g., tryhackme.com)  
+- **Port** → 80 (HTTP), 443 (HTTPS)  
+- **Path** → location on server (`/blog`)  
+- **Query String** → extra data (`?id=1`)  
+- **Fragment** → section of page (`#section`)  
+
+---
+
+## 📤 HTTP Requests
+
+Example request:
+
+GET / HTTP/1.1
+Host: tryhackme.com
+User-Agent: Firefox
+Referer: https://tryhackme.com/
+
+
+### Important parts:
+- **Method** → GET, POST, PUT, DELETE  
+- **Host** → target website  
+- **User-Agent** → browser info  
+- **Referer** → where request came from  
+
+---
+
+## 📥 HTTP Responses
+
+Example:
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 98
+
+<html>...</html> ```
+Includes:
+Status code
+Content type
+Content length
+Response body (actual data)
+🔧 HTTP Methods
+GET → Retrieve data
+POST → Submit data (create)
+PUT → Update data
+DELETE → Remove data
+📊 HTTP Status Codes
+
+Server responses that indicate what happened.
+
+Categories:
+🔹 1xx – Informational
+Request received, continue
+🔹 2xx – Success
+200 OK → Request successful
+201 Created → Resource created
+🔹 3xx – Redirection
+301 → Moved permanently
+302 → Temporary redirect
+🔹 4xx – Client Errors
+400 → Bad request
+401 → Unauthorized
+403 → Forbidden
+404 → Not found
+🔹 5xx – Server Errors
+500 → Internal error
+503 → Service unavailable
+💡 Why status codes matter:
+Finding vulnerabilities
+Discovering hidden pages (403)
+Debugging server issues
+Useful in SOC analysis and penetration testing
+📑 HTTP Headers
+Request Headers (Browser → Server)
+Host → target website
+User-Agent → browser info
+Content-Length → size of data
+Accept-Encoding → compression support
+Cookie → stored session data
+Response Headers (Server → Browser)
+Set-Cookie → stores session data
+Cache-Control → how long to store data
+Content-Type → type of content
+Content-Encoding → compression type
+🍪 Cookies
+Small pieces of data stored in browser
+How they work:
+Server sends cookie (Set-Cookie)
+Browser stores it
+Browser sends it back with future requests
+
+Used for:
+
+Login sessions
+User tracking
+🧱 How Websites Work
+Basic Flow:
+Browser sends request
+Server responds (HTML, CSS, JS)
+Browser renders the page
+🔹 Front-End (Client Side)
+HTML → structure
+CSS → design
+JavaScript → behavior
+🔹 Back-End (Server Side)
+Server logic (Python, PHP, Node.js)
+Database (user data, passwords)
+Authentication systems
+⚠️ Sensitive Data Exposure
+
+Occurs when websites accidentally expose important data.
+
+Causes:
+Leaving test data
+Comments in source code
+Exposing secrets in frontend
+Usage:
+Helpful in penetration testing
+Viewing page source can reveal hidden data
+💉 HTML Injection
+
+Occurs when user input is not filtered.
+
+Example:
+User inputs: <h1>Hacked</h1>
+Website displays it as actual HTML
+Risks:
+Fake login forms (phishing)
+Misleading messages
+Data manipulation
+🔄 Putting It All Together
+User requests a website
+DNS resolves IP
+Browser sends HTTP request
+Server responds with data
+Browser renders website
+⚡ Load Balancing
+Uses multiple servers instead of one
+Distributes traffic efficiently
+Sends requests to available/fastest server
+🌍 CDN (Content Delivery Network)
+Stores content in multiple locations worldwide
+Sends data from nearest server
+Improves speed and performance
+🛡️ WAF (Web Application Firewall)
+Protects web applications
+What it checks:
+URL
+Input fields
+Headers
+Payloads
+Blocks:
+SQL Injection
+HTML Injection
+Bots
+DDoS attacks
+Difference:
+Firewall → protects network
+WAF → protects web applications
+🖥️ Web Servers
+Software that delivers website content
+Stores website files
+Virtual Hosting
+One server can host multiple websites
+🔚 Full Web Flow
+
+User → Browser → Web Server → Backend → Database → Server Response → Browser Display
