@@ -1,1 +1,159 @@
+## Overview
+This document summarizes my learning from the **Operating Systems, Coding, and Database Basics** section of the TryHackMe Pre-Security path. It covers Linux & Windows command line basics, system information commands, security concepts, remote access, and basic SQL queries.
 
+---
+
+## 🐧 Linux (Ubuntu Terminal Basics)
+
+### 📁 Basic Commands
+
+- `pwd` → Print Working Directory (shows current location)
+  - Example: `/home/ubuntu`
+
+- `ls` → List files and folders in current directory
+- `ls -l` → Shows detailed file information
+- `ls -a` → Shows hidden files
+
+---
+
+### 📂 Navigation
+
+- `cd Documents` → Change directory
+- `pwd` → Confirm current location
+
+---
+
+### 🔎 Searching Files
+
+- `find ~ -name mission-brief.txt`  
+  → Search for a file in the home directory
+
+---
+
+### 📄 Reading Files
+
+- `cat mission-brief.txt` → Display file contents
+
+---
+
+### 👤 User Information
+
+- `whoami` → Shows current logged-in user  
+  Example output: `ubuntu`
+
+---
+
+### 🖥️ System Information
+
+- `uname -a` → Displays full system information  
+- `uname` → Shows OS name only  
+- `df -h` → Shows disk storage usage in human-readable format  
+
+---
+
+## 🪟 Windows Command Line Basics
+
+### 📁 Navigation
+
+- `cd` → Change directory
+- `dir` → List files and folders
+- `dir /a` → Show hidden files
+
+---
+
+### 🔍 File Searching
+
+- `dir /s taskbrief.txt`  
+  → Searches all subfolders for a file
+
+---
+
+### 📄 Reading Files
+
+- `type task-brief.bat` → Display file contents
+
+---
+
+### 🧠 System Information
+
+- `whoami` → Current user
+- `hostname` → Computer name
+- `systeminfo` → Full system details
+- `ipconfig` → Network configuration (IP, gateway, etc.)
+
+---
+
+## 🔐 Operating System Security
+
+### Common Weaknesses:
+- Weak authentication (weak passwords)
+- Poor file permissions
+- Exposure to malicious programs
+
+---
+
+## ⚔️ Practical Security Concepts
+
+Attackers may:
+- Attempt to gain unauthorized access
+- Steal usernames and passwords
+- Escalate privileges to administrator/root
+
+---
+
+### 👑 Privilege Escalation
+- Moving from normal user → admin/root user
+- Admin accounts have full system control
+
+---
+
+## 🔗 Remote Access (SSH)
+
+### SSH Login Example:
+```bash
+ssh sammie@10.114.179.56
+Used to connect to remote systems securely
+Requires username + password
+After Login:
+whoami → confirms current user
+cat filename → read files
+Switching Users:
+su johnny → switch to another user
+
+⚠️ Weak passwords can allow unauthorized access (example: abc123)
+
+🗄️ SQL Basics (Database Queries)
+
+SQL is used to interact with databases.
+
+📊 Basic SELECT Queries
+Select all data:
+SELECT * FROM Orders;
+* means all columns
+🍽️ Select Specific Columns
+SELECT drink, price FROM Orders;
+Returns only selected columns
+🔍 Filtering Data (WHERE)
+SELECT * FROM Orders
+WHERE drink = 'Coffee';
+Filters results based on condition
+📉 Sorting Data (ORDER BY)
+SELECT * FROM Orders
+ORDER BY price;
+Sorts from lowest to highest
+📊 Descending Order
+SELECT * FROM Orders
+ORDER BY price DESC;
+Sorts from highest to lowest
+💰 Filtering by Price
+SELECT * FROM Orders
+WHERE price <= 200;
+Shows only cheap items
+
+🧠 Key Takeaways:
+Linux and Windows command lines are essential for system control
+File navigation and searching are critical in cybersecurity
+SSH allows remote system access (often targeted by attackers)
+Weak passwords and misconfigurations lead to privilege escalation
+SQL is used to interact with databases and extract information
+Understanding queries helps in detecting database vulnerabilities
