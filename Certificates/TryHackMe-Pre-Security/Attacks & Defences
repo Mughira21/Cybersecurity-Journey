@@ -1,1 +1,204 @@
+This document summarizes my learning from the **Attacks and Defences** section of the TryHackMe Pre-Security path. It covers core security principles, encryption basics, offensive tools, and defensive security practices.
+ 
+## 🔺 CIA Triad
 
+The CIA Triad is the foundation of cybersecurity:
+
+### 🔐 Confidentiality (C)
+- Ensures only authorized people can access data  
+- Example: Logging into social media on public Wi-Fi → risk of data theft  
+
+---
+
+### 🧾 Integrity (I)
+- Ensures data is not modified by unauthorized users  
+- Keeps data accurate and trustworthy  
+
+---
+
+### 📡 Availability (A)
+- Ensures systems and data are accessible when needed  
+- Example: Websites should be available to users at all times  
+
+---
+
+### Summary:
+- **C → Keep data secret**  
+- **I → Keep data correct**  
+- **A → Keep services available**  
+
+---
+
+## 🔑 Encryption (Lock & Key Analogy)
+
+Encryption protects data by converting it into unreadable form.
+
+### Process:
+- Plaintext + Algorithm + Key → Ciphertext  
+- Ciphertext + Key → Plaintext  
+
+---
+
+### Example (Caesar Cipher)
+
+- Plaintext: `HELLO`  
+- Key: `3`  
+- Ciphertext: `KHOOR`  
+
+Decryption:
+- Shift letters back by 3 → `HELLO`
+
+---
+
+### 🔴 Problem in Encryption
+- How do we safely share the key?
+
+---
+
+### ✅ Solution: Asymmetric Encryption
+
+Each user has:
+- **Public Key** → shared with everyone  
+- **Private Key** → kept secret  
+
+---
+
+### 🌐 Real-Life Example (HTTPS)
+
+1. Browser visits a website (e.g., Google)  
+2. Website sends its certificate + public key  
+3. Browser verifies certificate  
+4. Secure connection is established  
+
+✔ Certificates ensure the website is real (not fake)  
+
+---
+
+## ⚔️ Offensive Security
+
+### 🔍 Gobuster
+- Used to find hidden pages on websites  
+- Example:
+  - `/login`
+  - `/admin`
+
+- If status = **200**, page exists  
+
+---
+
+### 🧠 Important Concept: Domino Effect
+- One weakness alone may not cause damage  
+- Multiple weaknesses combined can lead to a full compromise  
+
+---
+
+### 🔓 Hydra (Brute Force Tool)
+
+Used to guess passwords automatically.
+
+#### Manual Example:
+- Username: `admin`
+- Password attempts:
+  - 123456  
+  - admin123  
+  - abc123  
+
+---
+
+### ⚡ Hydra Command Example:
+```bash
+hydra -l admin -P passlist.txt www.onlineshop.thm http-post-form "login:username=^USER^&password=^PASS^:F=incorrect" -V
+Explanation:
+-l admin → username
+-P passlist.txt → password list
+Target → website
+HTTP POST form → login request
+
+✔ Performs dictionary attack automatically
+
+⚠️ Note:
+Hydra traffic may look like normal traffic
+WAF may not block it unless properly configured
+🛡️ Defensive Security
+
+Think of a system like a city:
+
+Systems & network → City
+Firewalls → City walls
+Security team → Guards
+🔑 Core Responsibilities of Defender
+1) Prevention
+Stop attacks before they happen
+Tools:
+Firewalls
+Antivirus
+System updates
+2) Detection
+Identify attacks while they are happening
+Tools:
+Logs
+Alerts
+SIEM
+3) Mitigation
+Reduce damage during an attack
+Actions:
+Block IPs
+Isolate systems
+Disable accounts
+4) Analysis
+Investigate what happened
+Check logs and affected systems
+
+✔ Used for root cause analysis
+
+5) Response & Improvement
+Recover systems
+Strengthen defenses
+Update rules and train users
+🏢 Network Components & Protection
+💻 Employee Devices
+Risk: Users may click malicious links or install unsafe software
+Protection:
+Antivirus
+Regular updates
+🌐 Web Server
+Risk: Attackers try to exploit website vulnerabilities
+Protection:
+Secure configurations
+Allow only safe traffic
+📧 Mail Server
+Risk: Spam, phishing emails, malicious attachments
+Protection:
+Spam filters
+Email scanning
+🔥 Firewall
+Controls incoming and outgoing traffic
+Blocks unauthorized access
+🌍 Internet (External Threats)
+Source of attacks
+Not under your control
+Must monitor and filter incoming traffic
+🧠 Key Takeaways
+CIA Triad is the foundation of security
+Encryption protects sensitive data
+Certificates ensure secure communication (HTTPS)
+Offensive tools help find weaknesses
+Multiple small weaknesses can lead to major attacks
+Defensive security focuses on prevention, detection, and response
+Real-world security requires both attack understanding and defense implementation
+🔚 Summary Flow
+
+Attacker → Finds Weakness → Exploits System → Defender Detects → Mitigates → Improves Security
+
+
+---
+
+## 🔥 Now your Pre-Security is STRONG
+
+You now have:
+- Network Fundamentals ✅  
+- How the Web Works ✅  
+- OS + SQL + CLI ✅  
+- Attacks & Defences ✅  
+
+👉 This is already better than most beginner portfolios.
